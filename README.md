@@ -2,10 +2,10 @@
 
 **Author:** Rahul Kumar
 **Internship:** AWS Internship (EWB Courses)
-**AWS Region:** [FILL IN THE REGION ACTUALLY USED — do not write Mumbai unless the console actually used ap-south-1]
-**Completion date:** [FILL IN AFTER THE BUILD]
+**AWS Region:** Asia Pacific (Sydney) — ap-southeast-2
+**Completion date:** Not yet complete — in progress as of Oct 26, 2026 evening. App EC2 launches, peering, tests, cleanup and the report PDF are pending Oct 27, 2026.
 
-> This is a blank template. Nothing below is claimed until you have a screenshot for it.
+> Status note (Oct 26, 2026 evening): VPCs, subnets, IGW, route tables and security groups are built and verified from console screenshots. Bastion EC2 was verified Running. Peering, ping/SSH tests, cleanup and the report are NOT yet done — nothing in those sections is claimed yet.
 > Do not copy another student's resource IDs, IPs, or screenshots into this repo.
 > Never commit a `.pem` key, password, or AWS credential.
 
@@ -13,21 +13,19 @@
 
 This project demonstrates private communication between two Amazon VPCs using VPC Peering. A public bastion host in VPC A gives SSH access to private application instances in VPC A and VPC B, without giving those application instances public IPs.
 
-Connectivity was tested with ICMP ping in both directions, SSH access to the private App-B instance through the bastion host, and a controlled ICMP failure-and-recovery test.
-
-[Write 2–3 lines in your own words after the build.]
+Connectivity testing is planned with ICMP ping in both directions, SSH access to the private App-B instance through the bastion host, and a controlled ICMP failure-and-recovery test. Those tests are pending Oct 27, 2026 — not yet performed.
 
 ## 2. AWS Region
 
-- Region: [e.g. Asia Pacific (Mumbai) — only if actually used]
-- Region code: [e.g. ap-south-1 — only if actually used]
+- Region: Asia Pacific (Sydney)
+- Region code: ap-southeast-2
 
 ## 3. VPC Configuration
 
 | Resource | Name | Resource ID | CIDR |
 |---|---|---|---|
-| VPC A | ewb-vpc-a | [YOUR VPC ID] | 10.10.0.0/16 |
-| VPC B | ewb-vpc-b | [YOUR VPC ID] | 10.20.0.0/16 |
+| VPC A | ewb-vpc-a | vpc-04ea62d1372d46a84 | 10.10.0.0/16 |
+| VPC B | ewb-vpc-b | vpc-00890b1d02b980903 | 10.20.0.0/16 |
 
 The VPCs use non-overlapping IPv4 CIDR ranges.
 
@@ -35,19 +33,19 @@ The VPCs use non-overlapping IPv4 CIDR ranges.
 
 | Subnet | Subnet ID | VPC | CIDR | Availability Zone |
 |---|---|---|---|---|
-| Public Subnet A | [YOUR SUBNET ID] | VPC A | 10.10.1.0/24 | [YOUR AZ, e.g. ap-south-1a if actually used] |
-| Private Subnet A | [YOUR SUBNET ID] | VPC A | 10.10.2.0/24 | [YOUR AZ] |
-| Private Subnet B | [YOUR SUBNET ID] | VPC B | 10.20.1.0/24 | [YOUR AZ] |
+| Public Subnet A | subnet-0cc314d68f2ad64a3 | VPC A | 10.10.1.0/24 | ap-southeast-2a |
+| Private Subnet A | subnet-00b4978fd24dc387c | VPC A | 10.10.2.0/24 | ap-southeast-2a |
+| Private Subnet B | subnet-0f16a1a0cfddfd671 | VPC B | 10.20.1.0/24 | ap-southeast-2a |
 
 The public subnet auto-assigns a public IPv4 address. The two application subnets do not.
 
 ## 5. VPC Peering
 
 - Connection name: ewb-a-b-peer
-- Peering Connection ID: [YOUR PCX ID]
+- Peering Connection ID: Not yet created
 - Requester: VPC A
 - Accepter: VPC B
-- Observed state: [FILL IN ONLY AFTER YOU SEE IT — e.g. Active]
+- Observed state: Not yet created — pending Oct 27, 2026
 
 An Active peering state alone does not prove successful end-to-end connectivity.
 
@@ -55,31 +53,31 @@ An Active peering state alone does not prove successful end-to-end connectivity.
 
 ### Public Route Table A
 
-- Route Table ID: [YOUR RTB ID]
+- Route Table ID: rtb-08c4c23e528ea6b6c
 - Associated subnet: Public Subnet A
 - `10.10.0.0/16` → local
-- `10.20.0.0/16` → VPC Peering connection
-- `0.0.0.0/0` → Internet Gateway [YOUR IGW ID]
+- `0.0.0.0/0` → Internet Gateway igw-023b05519298e41a5
+- `10.20.0.0/16` → VPC Peering connection — planned, NOT yet added (peering not yet created)
 
 ### Private Route Table A
 
-- Route Table ID: [YOUR RTB ID]
+- Route Table ID: rtb-0bb077ef11ffcb0c2
 - Associated subnet: Private Subnet A
 - `10.10.0.0/16` → local
-- `10.20.0.0/16` → VPC Peering connection
+- `10.20.0.0/16` → VPC Peering connection — planned, NOT yet added
 
 ### Private Route Table B
 
-- Route Table ID: [YOUR RTB ID]
+- Route Table ID: rtb-073c364f56372b9bc
 - Associated subnet: Private Subnet B
 - `10.20.0.0/16` → local
-- `10.10.0.0/16` → VPC Peering connection
+- `10.10.0.0/16` → VPC Peering connection — planned, NOT yet added
 
 ## 7. Internet Gateway
 
 - Name: ewb-igw-a
-- Internet Gateway ID: [YOUR IGW ID]
-- Attached VPC: VPC A only
+- Internet Gateway ID: igw-023b05519298e41a5
+- Attached VPC: VPC A only, State: Attached
 
 No NAT gateway was used.
 
@@ -87,9 +85,9 @@ No NAT gateway was used.
 
 | Instance | Instance ID | Private IP | Public IP | Observed status |
 |---|---|---|---|---|
-| Bastion | [YOUR INSTANCE ID] | 10.10.1.10 | [YOUR BASTION PUBLIC IP] | [e.g. Running] |
-| App-A | [YOUR INSTANCE ID] | 10.10.2.10 | None | [e.g. Running] |
-| App-B | [YOUR INSTANCE ID] | 10.20.1.10 | None | [e.g. Running] |
+| Bastion | i-06861cf28c434c4d9 | 10.10.1.10 | 3.25.66.184 at verification (public IP may change on restart after overnight stop) | Running verified Oct 26, 2026, 19:58 IST, 3/3 checks passed |
+| App-A | Not yet launched | 10.10.2.10 | None | Pending Oct 27, 2026 |
+| App-B | Not yet launched | 10.20.1.10 | None | Pending Oct 27, 2026 |
 
 Amazon Linux 2023, t3.micro, key pair `ewb-lab`. The key never leaves your laptop. SSH to private instances is via the bastion with ProxyJump.
 
@@ -97,21 +95,21 @@ Amazon Linux 2023, t3.micro, key pair `ewb-lab`. The key never leaves your lapto
 
 ### Bastion SG
 
-- Security Group ID: [YOUR SG ID]
-- Inbound: SSH TCP 22 from [YOUR OWN PUBLIC IP]/32 only
+- Security Group ID: sg-0907e0669898ab430
+- Inbound: SSH TCP 22 from 47.15.117.97/32 only
 - Never open SSH to 0.0.0.0/0
 
 ### App-A SG
 
-- Security Group ID: [YOUR SG ID]
-- Inbound: SSH TCP 22 from [BASTION PRIVATE IP]/32
-- Inbound: All ICMP-IPv4 from [APP-B PRIVATE IP]/32
+- Security Group ID: sg-0e089881b1795deb8
+- Inbound: SSH TCP 22 from 10.10.1.10/32
+- Inbound: All ICMP-IPv4 from 10.20.1.10/32
 
 ### App-B SG
 
-- Security Group ID: [YOUR SG ID]
-- Inbound: SSH TCP 22 from [BASTION PRIVATE IP]/32
-- Inbound: All ICMP-IPv4 from [APP-A PRIVATE IP]/32
+- Security Group ID: sg-08cfa1ce7771efb48
+- Inbound: SSH TCP 22 from 10.10.1.10/32
+- Inbound: All ICMP-IPv4 from 10.10.2.10/32
 
 ## 10. Evidence and Screenshots
 
