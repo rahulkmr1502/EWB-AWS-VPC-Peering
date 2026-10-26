@@ -11,8 +11,8 @@ Map every section to the workbook rubric (/100). Fill in only what you actually 
 - Private subnet A: subnet-00b4978fd24dc387c, 10.10.2.0/24, ap-southeast-2a
 - Private subnet B: subnet-0f16a1a0cfddfd671, 10.20.1.0/24, ap-southeast-2a
 - Bastion: i-06861cf28c434c4d9, 10.10.1.10, public IP 3.25.66.184 at verification Oct 26, 2026, 19:58 IST
-- App-A: 10.10.2.10, no public IP — not yet launched, pending Oct 27, 2026
-- App-B: 10.20.1.10, no public IP — not yet launched, pending Oct 27, 2026
+- App-A: i-07a0bb1697e20011b, 10.10.2.10, no public IP — Running, verified Oct 26, 2026, 20:46 IST
+- App-B: i-0614bec9b955b71b9, 10.20.1.10, no public IP — Running, verified Oct 26, 2026, 20:49 IST
 - Region actually used: Asia Pacific (Sydney), ap-southeast-2
 
 ## 2. Subnets, gateway, routes — 20 marks
