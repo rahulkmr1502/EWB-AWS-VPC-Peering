@@ -85,9 +85,9 @@ No NAT gateway was used.
 
 | Instance | Instance ID | Private IP | Public IP | Observed status |
 |---|---|---|---|---|
-| Bastion | i-06861cf28c434c4d9 | 10.10.1.10 | 3.25.66.184 at verification (public IP may change on restart after overnight stop) | Running verified Oct 26, 2026, 19:58 IST, 3/3 checks passed |
-| App-A | Not yet launched | 10.10.2.10 | None | Pending Oct 27, 2026 |
-| App-B | Not yet launched | 10.20.1.10 | None | Pending Oct 27, 2026 |
+| Bastion | i-06861cf28c434c4d9 | 10.10.1.10 | 3.107.8.12 (restarted Oct 26, 2026, 20:42 IST; earlier public IP 3.25.66.184 was released on stop) | Running, status Initializing at restart screenshot |
+| App-A | i-07a0bb1697e20011b | 10.10.2.10 | None | Running, verified Oct 26, 2026, 20:46 IST: VPC A, subnet ewb-a-private, private IP 10.10.2.10, no public IP |
+| App-B | i-0614bec9b955b71b9 | 10.20.1.10 | None | Running, verified Oct 26, 2026, 20:49 IST: VPC B, subnet ewb-b-private, private IP 10.20.1.10, no public IP |
 
 Amazon Linux 2023, t3.micro, key pair `ewb-lab`. The key never leaves your laptop. SSH to private instances is via the bastion with ProxyJump.
 
