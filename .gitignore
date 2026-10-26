@@ -1,0 +1,7 @@
+# Never commit these to the VPC project repo
+*.pem
+*.ppk
+*.key
+credentials
+.aws/
+*.env
