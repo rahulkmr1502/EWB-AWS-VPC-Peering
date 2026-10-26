@@ -5,36 +5,36 @@ Map every section to the workbook rubric (/100). Fill in only what you actually 
 ## 1. Architecture and IP plan — 15 marks
 
 - Diagram: bastion in public subnet A, App-A in private subnet A, App-B in private subnet B, peering between VPC A and VPC B.
-- VPC A: ewb-vpc-a, 10.10.0.0/16
-- VPC B: ewb-vpc-b, 10.20.0.0/16
-- Public subnet A: 10.10.1.0/24
-- Private subnet A: 10.10.2.0/24
-- Private subnet B: 10.20.1.0/24
-- Bastion: 10.10.1.10 (public IP: [YOURS])
-- App-A: 10.10.2.10, no public IP
-- App-B: 10.20.1.10, no public IP
-- Region actually used: [FILL IN]
+- VPC A: ewb-vpc-a, vpc-04ea62d1372d46a84, 10.10.0.0/16, State: Available, Main route table: rtb-0338c12bdf003083a
+- VPC B: ewb-vpc-b, vpc-00890b1d02b980903, 10.20.0.0/16, State: Available, Main route table: rtb-072bd1fc7a492f041
+- Public subnet A: subnet-0cc314d68f2ad64a3, 10.10.1.0/24, ap-southeast-2a
+- Private subnet A: subnet-00b4978fd24dc387c, 10.10.2.0/24, ap-southeast-2a
+- Private subnet B: subnet-0f16a1a0cfddfd671, 10.20.1.0/24, ap-southeast-2a
+- Bastion: i-06861cf28c434c4d9, 10.10.1.10, public IP 3.25.66.184 at verification Oct 26, 2026, 19:58 IST
+- App-A: 10.10.2.10, no public IP — not yet launched, pending Oct 27, 2026
+- App-B: 10.20.1.10, no public IP — not yet launched, pending Oct 27, 2026
+- Region actually used: Asia Pacific (Sydney), ap-southeast-2
 
 ## 2. Subnets, gateway, routes — 20 marks
 
-- Subnet table with your real subnet IDs and AZs.
-- Internet Gateway ewb-igw-a, attached to VPC A only. No NAT gateway.
-- Public route table A: local + 0.0.0.0/0 → IGW + 10.20.0.0/16 → peering.
-- Private route table A: local + 10.20.0.0/16 → peering.
-- Private route table B: local + 10.10.0.0/16 → peering.
-- Screenshot filenames: [LIST THEM]
+- Subnet table with your real subnet IDs and AZs (see Section 1).
+- Internet Gateway ewb-igw-a, igw-023b05519298e41a5, attached to VPC A only. No NAT gateway.
+- Public route table A: rtb-08c4c23e528ea6b6c, local + 0.0.0.0/0 → IGW verified Oct 26, 2026. Peering route 10.20.0.0/16 → peering is planned, NOT yet added.
+- Private route table A: rtb-0bb077ef11ffcb0c2, local only at present. Peering route planned, NOT yet added.
+- Private route table B: rtb-073c364f56372b9bc, local only at present. Peering route planned, NOT yet added.
+- Screenshot filenames: [LIST THEM — screenshots to be uploaded Oct 27, 2026]
 
 ## 3. Peering and both-way routes — 20 marks
 
-- Peering name: ewb-a-b-peer, ID: [YOUR PCX ID], state: [OBSERVED STATE]
+- Peering name: ewb-a-b-peer, ID: Not yet created, state: Not yet created — pending Oct 27, 2026
 - Route in VPC A pointing to VPC B's CIDR via peering, and the return route in VPC B pointing to VPC A's CIDR via peering. Both are required — a one-way route is not enough.
 - Screenshot filenames: [LIST THEM]
 
 ## 4. Security rules and private SSH — 20 marks
 
-- Bastion SG: SSH 22 from your own IP /32 only.
-- App-A SG: SSH from bastion private IP /32, ICMP from App-B IP /32.
-- App-B SG: SSH from bastion private IP /32, ICMP from App-A IP /32.
+- Bastion SG: sg-0907e0669898ab430, SSH 22 from 47.15.117.97/32 only.
+- App-A SG: sg-0e089881b1795deb8, SSH from 10.10.1.10/32, ICMP from 10.20.1.10/32.
+- App-B SG: sg-08cfa1ce7771efb48, SSH from 10.10.1.10/32, ICMP from 10.10.2.10/32.
 - Never SSH or ping open to 0.0.0.0/0.
 - SSH into App-B via bastion with ProxyJump, key never leaves the laptop.
 - Screenshot filename for the SSH session: [FILL IN]
