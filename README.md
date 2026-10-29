@@ -148,9 +148,9 @@ Two private VPCs with non-overlapping CIDRs were connected by peering, proven by
 
 - `README.md` — this file
 - `architecture/` — architecture diagram
-- `screenshots/` — your own build and test evidence
-- `resource-details/` — your own resource inventory
-- `Rahul_Kumar_EWB_VPC_Peering.pdf` — your project report (add it here after the build; the EWB form has no separate report-upload field)
+- `screenshots/` — my own build and test evidence
+- `resource-details/` — my own resource inventory
+- `Rahul_Kumar_EWB_VPC_Peering.pdf` — my project report (add it here after the build; the EWB form has no separate report-upload field)
 
 ## Security note
 
